@@ -1,0 +1,71 @@
+Ray Tracer Cheat Sheet
+======================
+
+Project structure
+-----------------
+- src/: implementation and headers
+- tests/: small C++ verification programs
+- build: g++ -std=c++17 -Wall -O2 src/*.cpp tests/test_*.cpp -o test_name
+
+Core classes
+------------
+- Vec3: 3D vector type
+  - fields: x, y, z
+  - operators: +, -, *, /, unary -
+  - functions: dot, cross, length, normalize
+
+- Ray: line ray with origin and direction
+  - constructor: Ray(Vec3 origin, Vec3 direction)
+  - method: Vec3 at(float t) const
+  - formula: origin + t * direction
+
+- Hittable: abstract interface
+  - virtual bool hit(const Ray &r, float t_min, float t_max, float &t_out) const = 0;
+
+- Sphere: concrete hittable object
+  - fields: center, radius
+  - implementation: solve quadratic for ray-sphere intersection
+
+- Camera: viewport and ray generator
+  - builds lower_left_corner, horizontal, vertical, origin
+  - get_ray(u, v) returns Ray for a pixel coordinate
+
+- World: scene container
+  - stores std::vector<Hittable*>
+  - hit loop finds closest intersection between t_min and t_max
+
+Build and run
+-------------
+- compile a test:
+  g++ -std=c++17 -Wall -O2 src/vec3.cpp src/ray.cpp src/camera.cpp tests/test_camera.cpp -o test_camera
+- run:
+  .\test_camera
+
+- compile render driver (when main.cpp exists):
+  g++ -std=c++17 -Wall -O2 src/*.cpp -o raytracer
+  .\raytracer > image.ppm
+
+Testing workflow
+----------------
+- write one test for each feature:
+  - Vec3 arithmetic
+  - Ray::at
+  - Sphere hit detection
+  - Camera ray direction
+  - World closest hit
+- keep tests small and assert expected values
+- when a new feature compiles and tests pass, the project is making progress
+
+Memory notes
+------------
+- stack: local variables, automatically freed
+- heap: dynamic objects created with new/delete or managed by containers
+- pointer: stores address of object, e.g. Hittable* or Vec3*
+- reference: alias to a value, e.g. const Vec3&
+- std::vector: dynamic array, automatically resizes
+
+Resume talking points
+---------------------
+- "Implemented a simple C++ ray tracer with custom vector math, camera, sphere intersection, and scene management."
+- "Used TDD to verify core math, ray generation, and collision detection."
+- "Built a minimal render pipeline producing PPM image output."

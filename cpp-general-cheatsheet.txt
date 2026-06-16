@@ -1,0 +1,115 @@
+C++ General Cheat Sheet
+=======================
+
+Basics
+------
+- compile: g++ -std=c++17 file.cpp -o program
+- run: .\program
+- include headers: #include <iostream>
+- main function: int main() { return 0; }
+
+Types
+-----
+- int, float, double, bool, char
+- std::string
+- pointers: int *p
+- references: int &r = x;
+- const: makes value or method immutable
+  - const int x = 5;
+  - int func() const;
+
+Variables
+---------
+- auto x = 5;
+- float x = 1.0f;
+- double x = 1.0;
+- bool ok = true;
+
+Functions
+---------
+- return_type name(params) {
+    // code
+  }
+- example:
+  int add(int a, int b) {
+    return a + b;
+  }
+
+Classes / structs
+-----------------
+struct Point {
+  float x, y, z;
+  Point(float x_, float y_, float z_) : x(x_), y(y_), z(z_) {}
+};
+
+class Example {
+public:
+  Example(int value);
+  int getValue() const;
+private:
+  int value_;
+};
+
+Constructors
+------------
+- Example(int value) : value_(value) {}
+- can set default values in constructor
+
+Methods
+-------
+- class methods usually declared in header and defined in source
+- const after method means it does not modify object
+  int getValue() const;
+
+Operators
+---------
+- overload arithmetic operators in classes:
+  Vec3 operator+(const Vec3 &other) const;
+- use operator* for scalar multiplication, etc.
+
+Memory
+------
+- stack: local variables, fast, freed automatically
+- heap: dynamic memory with new/delete
+- prefer automatic storage and containers like std::vector
+
+Containers
+----------
+- std::vector<T> list;
+- list.push_back(value);
+- list.size()
+- list[i]
+
+Control flow
+------------
+- if / else
+- for loops
+- while loops
+- switch
+
+Example
+-------
+#include <iostream>
+
+int main() {
+  std::cout << "Hello C++" << std::endl;
+  return 0;
+}
+
+Header/source split
+-------------------
+- header (.hpp) declares types and interfaces
+- source (.cpp) defines implementations
+- include headers in source files that need them
+
+Namespaces
+----------
+- use namespace std; (not recommended in headers)
+- prefer std:: prefix in source files
+
+Common patterns
+---------------
+- pass by const reference: void f(const Vec3 &v)
+- return const references only for existing objects, not temporaries
+- avoid raw new/delete unless necessary
+- use std::vector and RAII for memory safety
