@@ -1,7 +1,7 @@
 #include "sphere.hpp"
 
-Sphere::Sphere(const Vec3 &centre, float radius)
-    : centre(centre), radius(radius) {
+Sphere::Sphere(const Vec3 &centre, float radius, const Vec3 &color)
+    : centre(centre), radius(radius), color(color) {
 }
 
 bool Sphere::hit(const Ray &ray, float t_min, float t_max, HitRecord &rec) const {
@@ -26,5 +26,6 @@ bool Sphere::hit(const Ray &ray, float t_min, float t_max, HitRecord &rec) const
     rec.t = t;
     rec.point = ray.at(t);
     rec.normal = normalize(rec.point - centre);
+    rec.color = color;
     return true;
 }

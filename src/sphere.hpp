@@ -8,8 +8,9 @@
 struct Sphere : Hittable {
     Vec3 centre;
     float radius;
+    Vec3 color;
 
-    Sphere(const Vec3 &centre, float radius);
+    Sphere(const Vec3 &centre, float radius, const Vec3 &color);
 
     bool hit(
         const Ray &ray,

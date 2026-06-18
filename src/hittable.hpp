@@ -7,6 +7,7 @@
 struct HitRecord {
     Vec3 point;
     Vec3 normal;
+    Vec3 color;
     float t;
 };
 

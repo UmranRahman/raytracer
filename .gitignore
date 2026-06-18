@@ -67,3 +67,12 @@ vcpkg_installed/
 # test output & cache
 Testing/
 .cache/
+
+# Generated image output files
+output.ppm
+image.ppm
+outputs/*.ppm
+
+# Ignore local build artifacts and helper files
+cpp-general-cheatsheet.txt
+raytracer-cheatsheet.txt
