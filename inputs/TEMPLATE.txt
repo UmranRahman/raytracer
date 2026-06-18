@@ -1,0 +1,42 @@
+# TEMPLATE: scene description for raytracer
+# Lines below should be plain values separated by spaces (no comments in real file)
+
+# 1) image width and height (integers)
+# Example: 640 480
+image_width image_height
+
+# 2) viewport height (float)
+# Example: 2.0
+viewport_height
+
+# 3) focal length (float)
+# Example: 1.0
+focal_length
+
+# 4) light position (x y z) and brightness (float)
+# Example: 20.0 20.0 10.0 1000.0
+light_x light_y light_z light_brightness
+
+# 5) number of palette colors (integer)
+# Example: 4
+color_count
+
+# 6) color_count entries of 24-bit hex colors in 0xRRGGBB format
+# Example: 0x1188EE 0xDD2266 0xDD7700 0x11CC66
+color_hex[0] color_hex[1] ... color_hex[N-1]
+
+# 7) background color index (integer: 0 .. color_count-1)
+# Example: 0
+background_color_index
+
+# 8) number of spheres (integer)
+# Example: 3
+sphere_count
+
+# 9) sphere definitions — one sphere per line:
+# center_x center_y center_z radius color_index
+# center = float triple, radius = float, color_index = index into palette (0-based)
+# Example: 2.0 0.0 -5.0 2.0 2
+# (repeat sphere_count times)
+
+# End of template

@@ -1,0 +1,54 @@
+Beginner-friendly walkthrough of `src/main.cpp`
+
+What this file does (one sentence)
+- It reads a simple scene description from a text file, traces rays through the scene to compute colors for each pixel, and writes a binary PPM image.
+
+High-level steps (simple)
+1. Read scene settings from the input file (image size, camera, light, colors, spheres).
+2. Build a list of spheres and a color palette.
+3. For each pixel, shoot several rays (3x3 samples) to reduce jagged edges.
+4. For each ray, check what it hits and compute a shaded color (diffuse lighting + shadows).
+5. Average the samples and write the final pixel color to a PPM file.
+
+Key types you should know
+- `Vec3`: simple 3-number container used for points, directions, and colors (x,y,z).
+- `Ray`: has an origin and a direction; you can ask for a point along the ray.
+- `Camera`: converts screen positions (u,v) into rays through the scene.
+- `World`: stores pointers to geometric objects (here, `Sphere`) and finds the closest intersection for a ray.
+- `HitRecord`: when a ray hits an object, a `HitRecord` stores the hit point, surface normal, color, and distance `t`.
+
+Important small functions (what they mean)
+- `unpackRGB(packed)`: turns a 24-bit integer like `0xRRGGBB` into three floats in 0..1.
+- `in_shadow(shadow_ray, world, max_t)`: returns true if something blocks the light before `max_t`.
+- `shaded_color(rec, light_pos, brightness, world)`: computes lighting at the hit point using the surface normal and light; dims the color if in shadow.
+- `ray_color(ray, world, background, light_pos, brightness)`: returns the color seen along a ray (either object color or background).
+- `to_byte(float)`: converts a float in 0..1 into an 8-bit value 0..255.
+
+How the main loop works (pixel-by-pixel, in plain words)
+- The program loops every pixel from top row to bottom.
+- For each pixel it takes 9 samples (3 across × 3 down) inside that pixel.
+- Each sample gives a small offset `u` and `v` (horizontal and vertical positions normalized to 0..1).
+- The camera turns `u,v` into a `Ray`. The renderer traces that ray and gets a color.
+- The 9 sample colors are averaged to get the final pixel color (this reduces aliasing).
+- The color is converted to three bytes and written to the PPM file.
+
+Input file reminder (short)
+- `image_width image_height`
+- `viewport_height`
+- `focal_length`
+- `light_x light_y light_z light_brightness`
+- `color_count` then `color_count` hex colors like `0xRRGGBB`
+- `background_color_index`
+- `sphere_count` then one line per sphere: `cx cy cz radius color_index`
+
+How to run (example)
+- Build: `make`
+- Render example 1: `make example1` or run directly:
+
+  Windows PowerShell:
+  .\raytracer.exe inputs\example1.txt outputs\example1.ppm
+
+  macOS / Linux:
+  ./raytracer inputs/example1.txt outputs/example1.ppm
+
+If you're new to C++ and want me to explain any single line or symbol (for example, what `std::vector` or `std::ifstream` means), tell me which line number or paste the line and I will explain it in plain English. Happy to inline-comment `src/main.cpp` too if you want that next.
