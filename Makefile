@@ -49,7 +49,7 @@ test: all $(TEST_BINARIES)
 	done
 
 tests/%: tests/%.cpp
-	$(CXX) $(CXXFLAGS) -o $@ $< -I src
+	$(CXX) $(CXXFLAGS) -o $@ $< src/vec3.cpp src/ray.cpp src/camera.cpp src/world.cpp src/sphere.cpp -I src
 
 clean:
 	rm -f $(TARGET) $(OUTPUT_DIR)/*.ppm $(TEST_BINARIES)
