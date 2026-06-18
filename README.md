@@ -66,6 +66,11 @@ Notes
 - `make` simplifies repeated tasks (build, example runs, clean) but is not required to use the project.
 - The `Makefile` targets write output PPM files to the `outputs/` folder; use ImageMagick (`magick convert`) or an image viewer that supports PPM to view or convert them.
 
+Performance note
+
+- High-resolution renders (e.g., 1920x1080) are significantly slower because the renderer traces 9 rays per pixel. Estimated total rays = width * height * 9. For 1920x1080 that's ~18.7 million rays. Expect render times of minutes to hours depending on CPU.
+- To speed up: compile with `-O3`, reduce samples (change 3x3 sampling to 2x2 in `src/main.cpp`), or add multithreading (OpenMP / std::thread).
+
 ## Input format
 
 Each scene file uses this order:
@@ -86,6 +91,8 @@ Each scene file uses this order:
 - `inputs/example1.txt` - three spheres over a sky background
 - `inputs/example2.txt` - four spheres with a darker blue background
 - `inputs/example3.txt` - two spheres with a tall 800x600 render
+ - `inputs/example_1920x1080.txt` - HD 1920x1080 example
+ - `inputs/example_1280x720.txt` - HD 1280x720 example
 
 ## Clean
 
