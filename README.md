@@ -20,48 +20,51 @@ This project renders configurable sphere scenes into a binary PPM image using a 
 - `outputs/` - recommended destination for rendered images
  - `outputs/README.txt` - quick notes on viewing and converting generated PPM images
 
-## Build
+## Build & Run
 
-From the repository root, build the executable using:
+This project provides both a `Makefile` for Unix-like environments (Linux, macOS, MSYS2) and direct compiler commands for Windows users who do not have `make` installed.
+
+Linux / macOS / MSYS2 (recommended)
+
+Build with:
 
 ```bash
 make
 ```
 
-This Makefile uses `g++` with `-std=c++17`, so it works on machines with a C++17 compiler installed. It is compatible with MSYS2 on Windows and standard Unix-like environments.
+Or compile directly with `g++`:
 
-## Run
-
-Render the first sample scene with:
-
-```powershell
-make example1
+```bash
+g++ -std=c++17 -Wall -O2 -o raytracer src/main.cpp src/sphere.cpp src/world.cpp src/camera.cpp src/vec3.cpp
 ```
 
-For the other scenes:
+Run a sample (writes into `outputs/`):
 
-```powershell
+```bash
+make example1
 make example2
 make example3
 ```
 
-Each command writes a PPM file into `outputs/`:
+Windows (PowerShell / cmd)
 
-- `outputs/example1.ppm`
-- `outputs/example2.ppm`
-- `outputs/example3.ppm`
-
-You can also run a custom file directly:
+If you use MSYS2 / MinGW with `make`, run the same `make` targets inside the MinGW shell. If you don't have `make`, compile and run directly from PowerShell or cmd:
 
 ```powershell
-.\raytracer.exe inputs\example2.txt outputs\custom.ppm
+g++ -std=c++17 -Wall -O2 -o raytracer.exe src\main.cpp src\sphere.cpp src\world.cpp src\camera.cpp src\vec3.cpp
+.\raytracer.exe inputs\example1.txt outputs\example1.ppm
 ```
 
-Or on macOS/Linux:
+If your MinGW installation provides `mingw32-make`, you can run:
 
-```bash
-./raytracer inputs/example2.txt outputs/custom.ppm
+```powershell
+mingw32-make example1
 ```
+
+Notes
+
+- `make` simplifies repeated tasks (build, example runs, clean) but is not required to use the project.
+- The `Makefile` targets write output PPM files to the `outputs/` folder; use ImageMagick (`magick convert`) or an image viewer that supports PPM to view or convert them.
 
 ## Input format
 
