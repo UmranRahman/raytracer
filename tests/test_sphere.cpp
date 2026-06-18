@@ -1,6 +1,7 @@
 #include <cassert>
 #include <cmath>
 #include "../src/sphere.hpp"
+#include "../src/ray.hpp"
 
 static bool approxEqual(float a, float b, float eps = 1e-5f) {
     return std::fabs(a - b) < eps;

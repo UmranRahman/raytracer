@@ -35,7 +35,7 @@ make
 Or compile directly with `g++`:
 
 ```bash
-g++ -std=c++17 -Wall -O2 -o raytracer src/main.cpp src/sphere.cpp src/world.cpp src/camera.cpp src/vec3.cpp
+g++ -std=c++17 -Wall -O2 -o raytracer src/main.cpp src/sphere.cpp src/world.cpp src/camera.cpp src/vec3.cpp src/ray.cpp
 ```
 
 Run a sample (writes into `outputs/`):
@@ -93,6 +93,16 @@ Each scene file uses this order:
 - `inputs/example3.txt` - two spheres with a tall 800x600 render
  - `inputs/example_1920x1080.txt` - HD 1920x1080 example
  - `inputs/example_1280x720.txt` - HD 1280x720 example
+
+## Test
+
+Run the built-in tests with:
+
+```bash
+make test
+```
+
+This will compile the unit test programs in `tests/` and execute them.
 
 ## Clean
 
