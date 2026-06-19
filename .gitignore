@@ -70,7 +70,7 @@ Testing/
 # Generated image output files
 output.ppm
 image.ppm
-outputs/*.ppm
+#outputs/*.ppm
 
 # Ignore local build artifacts and helper files
 cpp-general-cheatsheet.txt
